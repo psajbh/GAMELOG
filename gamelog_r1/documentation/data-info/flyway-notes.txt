@@ -1,0 +1,20 @@
+to execute flyway from scratch, you need to clean out the schema.
+From mysql workbench execute the following:
+	
+	drop schema if exists gamelog;
+	create schema if not exists gamelog;
+	
+	now you have a virgin schema.
+	
+	from command prompt: 
+		John@DESKTOP-C44K8NO D:\projects-2018\PSAJBH\my-gamelog\gamelog
+		> mvn flyway:migrate -Pjbh
+	
+	or from Eclipse:
+		Run Config	
+		Base directory: ${workspace_loc:/gamelog}
+		Goals: flyway:migrate
+		Profiles: jbh
+		
+		 
+	

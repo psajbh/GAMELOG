@@ -1,0 +1,26 @@
+Park data.
+In the PARKS_20xx.txt file we need to make sure there are not any
+	commas in the Notes element,  convert them to semi-colons or underscore.
+	Don't delete the line, just create a new line after it with 
+	the edited value. Parks with element size > 9 are not processed.
+	
+	Also, if the league value is unknown, for example a game played in
+	a foreign country, or exhibition leave the value empty.
+	
+In case of a failure inserting data, and you want to do it over again you will need to remove
+all of the data persisted in your run.  The below queries should be executed in there order.
+	-- be sure to replace the date with your date. 
+	delete from ump_gamelog where date_created >= '2019-02-18';
+	delete from tm_gameline_bat where date_created >= '2019-02-18';
+	delete from tm_gameline_defense where date_created >= '2019-02-18';
+	delete from tm_gameline_pitch where date_created >= '2019-02-18';
+	delete from tm_gamelog where date_created >= '2019-02-18';
+	delete from park where date_created >= '2019-02-18';
+	delete from team where date_created >= '2019-02-18';
+	delete from lineitem_order where date_created >= '2019-02-18';
+	delete from lineitem_pos where date_created >= '2019-02-18';
+	delete from gamelog where date_created >= '2019-02-18';
+	delete from gamelog_awards where date_created >= '2019-02-18';
+	delete from person where date_created >= '2019-02-18';
+	delete from season where date_created >= '2019-02-18';
+

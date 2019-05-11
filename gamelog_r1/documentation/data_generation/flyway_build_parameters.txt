@@ -1,0 +1,27 @@
+flyway clean:
+	Base Directory: ${workspace_loc:/gamelog}
+	Goals: flyway:clean -e
+	Profiles:
+		Zenbook: jbh
+		Asus-Nancy: nancy
+		older Asus: old-asus
+	User Settings: C:\Users\John\.m2\settings.xml
+	
+flyway migrate:
+	Base Directory: ${workspace_loc:/gamelog}
+	Goals: flyway:migrate -e
+	Profiles:
+		Zenbook: jbh
+		Asus-Nancy: nancy
+		older Asus: old-asus
+	User Settings: C:\Users\John\.m2\settings.xml
+	
+flyway repair:
+	Base Directory: ${workspace_loc:/gamelog}
+	Goals: flyway:migrate -e
+	Profiles:
+		Zenbook: jbh
+		Asus-Nancy: nancy
+		older Asus: old-asus
+	User Settings: C:\Users\John\.m2\settings.xml
+	

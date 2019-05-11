@@ -1,0 +1,31 @@
+The application is run by running the GameLogParseInitializer as a Java Application via Eclipse IDE.  
+It can also be run by calling java -jar in the console
+
+The application code is maintained in gitHub. https://github.com/psajbh/ in the PSAJBH repository. 
+The code is contained in the my-tap2 branch.
+The latest my-tap2 branch code represents a base standalone application.
+The branch gamelog-rest represents a Spring REST end point that provides same functionality 
+
+The control value represents a year of data ie. "2017". The application will run 2017 if the value passed in is null.
+
+flyway:
+to execute flyway from scratch, you need to clean out the schema.
+From mysql workbench execute the following:
+	
+	drop schema if exists gamelog;
+	create schema if not exists gamelog;
+	now you have a virgin schema.
+	
+	run goal: flyway:clean -e  profile: jbh
+	          flyway:migrate -e profile: jbh
+	          flyway:repair -e profile: jbh 
+
+	There are 3 profiles need to figure out what the other two are.
+	Zenbook (DESKTOP-C44K8NO) profile is: jbh
+	Nancy ASUS (DESKTOP-RSSQ3C) profile is: Nancy
+	old-asus profile is: old-asus
+	
+	
+	
+	
+	

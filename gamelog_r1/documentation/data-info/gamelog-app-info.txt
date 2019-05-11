@@ -1,0 +1,47 @@
+database dependencies:
+	all tables use InnoDB Version 10
+	-  you can check directly by running SHOW TABLE STATUS
+	
+	[[How do I know if a mysql table is using myISAM or InnoDB Engine?|https://stackoverflow.com/questions/4515490/how-do-i-know-if-a-mysql-table-is-using-myisam-or-innodb-engine]]
+	[[MySQL - How to temporarily disable a foreign key constraint?|https://tableplus.io/blog/2018/08/mysql-how-to-temporarily-disable-foreign-key-constraints.html]]
+	
+ 	<dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>8.0.12</version>
+	</dependency>
+	
+	- deleting gamelog data and dependencies run following.
+	for DESKTOP_RSS2Q3C:
+	SET FOREIGN_KEY_CHECKS = 0;
+		delete from ump_gamelog;
+		delete from lineitem_order;
+		delete from lineitem_pos;
+		delete from tm_gameline_bat;
+		delete from tm_gameline_pitch;
+		delete from tm_gameline_defense;
+		delete from tm_gamelog;
+		delete from gamelog;
+		delete from gamelog_awards;
+	SET FOREIGN_KEY_CHECKS = 1;
+	
+	for: DESKTOP_C44K8NO the following will work.
+	SET SQL_SAFE_UPDATES=0;
+		delete from ump_gamelog;
+		delete from lineitem_order;
+		delete from lineitem_pos;
+		delete from tm_gameline_bat;
+		delete from tm_gameline_pitch;
+		delete from tm_gameline_defense;
+		delete from tm_gamelog;
+		delete from gamelog;
+		delete from gamelog_awards;
+	SET SQL_SAFE_UPDATES=1;
+	
+deployment environments:
+  -- DESKTOP_C44K8NO	(Zenbook)
+  -- JOHN_ASUS1PC		(Old Asus)
+  -- DESKTOP_RSS2Q3C	(Nancy's ASUS)
+	
+	
+	

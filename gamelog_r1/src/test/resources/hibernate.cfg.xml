@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+ 	<mapping class="com.jhart.gamelog.entities.park.EntityPark" />
+ 	<mapping class="com.jhart.gamelog.entities.location.EntityLocation" />
+ 	<mapping class="com.jhart.gamelog.entities.team.EntityTeam" />
+ 	<mapping class="com.jhart.gamelog.entities.team.EntityDivision" />
+ 	<mapping class="com.jhart.gamelog.entities.team.EntityLeague" />
+ 	<mapping class="com.jhart.gamelog.entities.team.EntitySeason" />
+ 	<mapping class="com.jhart.gamelog.entities.team.EntityFranchise" />
+ 	<mapping class="com.jhart.gamelog.entities.person.EntityPerson" />
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityGamelog" />
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityTeamGamelog" />
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityGameLineBat" />
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityGameLinePitch" />
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityGameLineDefense" />
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityLineItemPos"/>
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityLineItemOrder" />
+ 	<mapping class="com.jhart.gamelog.entities.gamelog.EntityUmpireGamelog" />
+	<mapping class="com.jhart.gamelog.entities.gamelog.EntityGamelogAwards" />
+ </session-factory>
+
+ </hibernate-configuration>

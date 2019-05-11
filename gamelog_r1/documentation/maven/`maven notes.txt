@@ -1,0 +1,10 @@
+to manually install a maven dependency into the .m2 repository run the maven-file-install.bat. 
+	you will need to update the file with dependency information before exeucting.
+---------------------
+to create a new maven project suited for an mvc project look at:
+[[maven-archetype-quickweb|https://github.com/sabram/maven-archetype-quickweb]]
+	This project has been installed on local .m2 repositories and can be used to manually install dependencies.
+
+	The command is like:  mvn archetype:generate -DarchetypeGroupId=com.shaunabram -DarchetypeArtifactId=maven-archetype-quickweb -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.naples.jhart -DartifactId=%project% -DinteractiveMode=false
+---------------------
+

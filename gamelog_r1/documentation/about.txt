@@ -1,0 +1,2 @@
+application is located: D:\projects-2018\PSAJBH\gamelog-multi-module
+git repo branch: my-tap2

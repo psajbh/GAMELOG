@@ -1,0 +1,37 @@
+sql:
+
+CREATE TABLE `park` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(6) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `aka` varchar(45),
+  `city` varchar(30),
+  `state` varchar(20),
+  `notes` varchar(255),
+  'league' varchar(2),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `code_UNIQUE` (`code`)
+)ENGINE=InnoDB;
+
+My HIbernate Version 5.2.6
+
+How to persist creation and update timestamps with Hibernate: 
+	https://www.thoughts-on-java.org/persist-creation-update-timestamps-hibernate/
+
+enum mapping:	
+Hibernate Tips: How to map an Enum to a database column:
+	https://www.thoughts-on-java.org/hibernate-tips-map-enum-database-column/
+	
+Hibernate 5 - Enum Type Mapping example
+	https://www.boraji.com/hibernate-5-enum-type-mapping-example
+	
+jacoco: http://www.baeldung.com/jacoco
+https://www.mkyong.com/maven/jacoco-java-code-coverage-maven-example/		
+
+navigate to: D:\projects-2018\PSAJBH\my-gamelog\gamelog\target\site\jacoco\index.html to view reports
+
+A date in YYYY-MM-DD format, between 1000-01-01 and 9999-12-31. For example, December 30th, 1973 would be stored as 1973-12-30
+//https://stackoverflow.com/questions/24650186/choosing-between-java-util-date-or-java-sql-date		
+	
+	
