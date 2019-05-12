@@ -34,8 +34,8 @@ public class UtilsTest {
     	System.out.printf("%d:%02d", hours, minutes);
     }
     
-    @Test
-    public void testVirusProtection() throws Exception {
+    //@Test
+/*    public void testVirusProtection() throws Exception {
     	
     	 Runtime rt = Runtime.getRuntime();
          Process pr = null;
@@ -48,7 +48,7 @@ public class UtilsTest {
              System.out.println("Error Executing Programs");
          }
     }
-
+*/
 }
 
 /*
