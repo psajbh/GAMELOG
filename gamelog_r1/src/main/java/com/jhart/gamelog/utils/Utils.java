@@ -10,8 +10,12 @@ import org.slf4j.LoggerFactory;
 
 import com.jhart.gamelog.api.Parser;
 import com.jhart.gamelog.exception.GamelogException;
+import com.jhart.gamelog.parser.ImportDataManager;
 import com.jhart.gamelog.transform.PersonTransformer;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Utils {
 	private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
 	private static final  String HYPHEN = "-";
@@ -106,6 +110,7 @@ public class Utils {
 	}
 
 	public static int convertStringToInt(String s) throws GamelogException{
+		//log.debug("convertStringToInt- " + s);
 		int rValue;
 		if (StringUtils.isBlank(s)) {
 			GamelogException gle = new GamelogException();

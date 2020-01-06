@@ -461,9 +461,13 @@ public class MasterGamelogDaoImp extends GameLogDao implements MasterGameLogDao 
                 else {
                     newGameLog.setVisitTeam(newEntityTeamGamelog);
                 }
+                session.saveOrUpdate(newGameLog);
+                session.getTransaction().commit();
             }
-            session.saveOrUpdate(newGameLog);
-            session.getTransaction().commit();
+            else {
+            	
+            	LOG.warn(newGameLog.getSeason().getCode() +" " + team.getCode() + " is NOT persisted");
+            }
         }
         catch(Exception e) {
         	LOG.debug("saveTeam:  [2] - exception " + e.getMessage());
