@@ -1,5 +1,3 @@
--- D:\projects-2018\PSAJBH\my-gamelog\gamelog\documentation\data_generation\gamelog-views.sql
-
 CREATE VIEW gamelog.v_catcher AS 
 select catchers.tm_gamelog_id_fk as id, catchers.game_code as gc, p.full_name as 'C'
 from lineitem_pos catchers, person p
@@ -276,7 +274,7 @@ g.date_of_game as dateOfGame, w.weekday_code as day, IF(g.day_game > 0,'Night','
 CONCAT(g.date_of_game, ' (', w.weekday_code, ':', IF(g.day_game > 0,'Night','Day'),')' ) as daytime,
 g.attendance, g.total_outs outs, 
 CONCAT(tv.name, ' ', tv.alias) V_TM,
-CONCAT(th.name, ' ', tv.alias) H_TM, 
+CONCAT(th.name, ' ', th.alias) H_TM, 
 g.v_tm_game_score as V_SCORE_LINE, 
 g.v_score V_SCORE, 
 g.h_tm_game_score as H_SCORE_LINE,
@@ -303,33 +301,35 @@ JOIN weekday w ON g.day_of_week_fk = UPPER(w.weekday_code)
 JOIN v_umpire vu ON g.gamelog_id_pk = vu.gamelog_id_fk
 JOIN v_awards va ON g.gamelog_id_pk = va.gamelog_id_fk;
 
+-- select * from v_gamelog;
+
 CREATE VIEW v_visit_team AS
-select g.gamelog_id_pk, g.gamelog_code, g.visitTeamId, g.homeTeamId, 
+select g.gamelog_id_pk, g.gamelog_code, g.v_tm, g.h_tm, 
 vso.tmCode as v_team, vso.o1, vso.o2, vso.o3, vso.o4, vso.o5, vso.o6, vso.o7, vso.o8, vso.o9 ,
 vpos.M, vpos.SP, vpos.C, vpos.FB as '1B', vpos.SB as '2B', vpos.SS, vpos.TB as '3B', vpos.LF, vpos.CF, vpos.RF, vpos.DH,
 vgb.ab, vgb.h, vgb.d, vgb.t, vgb.hr, vgb.rbi, vgb.sh, vgb.sf, vgb.hbp, vgb.bb, vgb.ibb, vgb.so, vgb.sb, vgb.cs, vgb.gidp, vgb.awci, vgb.lob,
 vgd.putouts, vgd.assists, vgd.errors, vgd.pb, vgd.dp, vgd.tp,
 vgp.pitchers_used as p_used, vgp.individual_er as i_er, vgp.team_er, vgp.wp, vgp.balks
 from v_gamelog g
-JOIN v_game_start_order vso ON g.gamelog_id_pk = vso.gameId and g.visitTeamId = vso.teamGameId
-JOIN v_game_start_pos vpos ON g.gamelog_id_pk = vpos.gameId and g.visitTeamId = vpos.teamGameId
-JOIN v_gameline_bat vgb ON g.visitTeamId = vgb.tm_gamelog_id_pk
-JOIN v_gameline_defense vgd ON g.visitTeamId = vgd.tm_gamelog_id_pk
-JOIN v_gameline_pitch vgp ON g.visitTeamId = vgp.tm_gamelog_id_pk;
+JOIN v_game_start_order vso ON g.gamelog_id_pk = vso.gameId and g.v_tm = vso.teamGameId
+JOIN v_game_start_pos vpos ON g.gamelog_id_pk = vpos.gameId and g.v_tm = vpos.teamGameId
+JOIN v_gameline_bat vgb ON g.v_tm = vgb.tm_gamelog_id_pk
+JOIN v_gameline_defense vgd ON g.v_tm = vgd.tm_gamelog_id_pk
+JOIN v_gameline_pitch vgp ON g.v_tm = vgp.tm_gamelog_id_pk;
 
 CREATE VIEW v_home_team AS
-select g.gamelog_id_pk, g.gamelog_code, g.visitTeamId, g.homeTeamId, 
+select g.gamelog_id_pk, g.gamelog_code, g.v_tm, g.h_tm, 
 hso.tmCode as v_team, hso.o1, hso.o2, hso.o3, hso.o4, hso.o5, hso.o6, hso.o7, hso.o8, hso.o9 ,
 hpos.M, hpos.SP, hpos.C, hpos.FB as '1B', hpos.SB as '2B', hpos.SS, hpos.TB as '3B', hpos.LF, hpos.CF, hpos.RF, hpos.DH,
 hgb.ab, hgb.h, hgb.d, hgb.t, hgb.hr, hgb.rbi, hgb.sh, hgb.sf, hgb.hbp, hgb.bb, hgb.ibb, hgb.so, hgb.sb, hgb.cs, hgb.gidp, hgb.awci, hgb.lob,
 hgd.putouts, hgd.assists, hgd.errors, hgd.pb, hgd.dp, hgd.tp,
 hgp.pitchers_used as p_used, hgp.individual_er as i_er, hgp.team_er, hgp.wp, hgp.balks
 from v_gamelog g
-JOIN v_game_start_order hso ON g.gamelog_id_pk = hso.gameId and g.homeTeamId = hso.teamGameId
-JOIN v_game_start_pos hpos ON g.gamelog_id_pk = hpos.gameId and g.homeTeamId  = hpos.teamGameId
-JOIN v_gameline_bat hgb ON g.homeTeamId = hgb.tm_gamelog_id_pk
-JOIN v_gameline_defense hgd ON g.homeTeamId = hgd.tm_gamelog_id_pk
-JOIN v_gameline_pitch hgp ON g.homeTeamId = hgp.tm_gamelog_id_pk;
+JOIN v_game_start_order hso ON g.gamelog_id_pk = hso.gameId and g.h_tm = hso.teamGameId
+JOIN v_game_start_pos hpos ON g.gamelog_id_pk = hpos.gameId and g.h_tm = hpos.teamGameId
+JOIN v_gameline_bat hgb ON g.h_tm = hgb.tm_gamelog_id_pk
+JOIN v_gameline_defense hgd ON g.h_tm = hgd.tm_gamelog_id_pk
+JOIN v_gameline_pitch hgp ON g.h_tm = hgp.tm_gamelog_id_pk;
 
 
 
