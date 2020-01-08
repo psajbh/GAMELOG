@@ -1,19 +1,13 @@
-SELECT division_id_pk from division where LEFT(date_created,4)  = '2020';
-SELECT franchise_id_pk, LEFT(date_created,4)  FROM franchise where LEFT(date_created,4) = '2020';
-SELECT gamelog_id_pk, LEFT(date_created,4)  FROM gamelog where LEFT(date_created,4) = '2020';
-SELECT gamelog_awards_id_pk, LEFT(date_created,4)  FROM gamelog_awards where LEFT(date_created,4) = '2020';
-SELECT gametype_code, LEFT(date_created,4)  FROM gametype where LEFT(date_created,4) = '2020';
-SELECT league_id_pk, LEFT(date_created,4)  FROM league where LEFT(date_created,4) = '2020';
-SELECT tm_line_item_order_id_pk, LEFT(date_created,4)  FROM lineitem_order where LEFT(date_created,4) = '2020';
-SELECT TM_LINE_ITEM_POS_ID_PK, LEFT(date_created,4)  FROM lineitem_pos where LEFT(date_created,4) = '2020';
-SELECT location_id_pk, LEFT(date_created,4)  FROM location where LEFT(date_created,4) = '2020';
-SELECT park_id_pk, LEFT(date_created,4)  FROM park where LEFT(date_created,4) = '2020';
-SELECT person_id_pk, LEFT(date_created,4)  FROM person where LEFT(date_created,4) = '2020';
-SELECT season_id_pk, LEFT(date_created,4)  FROM season where LEFT(date_created,4) = '2020';
-SELECT team_id_pk, LEFT(date_created,4)  FROM team where LEFT(date_created,4) = '2020';
-SELECT tm_gameline_bat_id_pk, LEFT(date_created,4)  FROM tm_gameline_bat where LEFT(date_created,4) = '2020';
-SELECT tm_gameline_defense_id_pk, LEFT(date_created,4)  FROM tm_gameline_defense where LEFT(date_created,4) = '2020';
-SELECT tm_gameline_pitch_id_pk, LEFT(date_created,4)  FROM tm_gameline_pitch where LEFT(date_created,4) = '2020';
-SELECT tm_gamelog_id_pk, LEFT(date_created,4)  FROM tm_gamelog where LEFT(date_created,4) = '2020';
-SELECT ump_gamelog_id_pk, LEFT(date_created,4)  FROM ump_gamelog where LEFT(date_created,4) = '2020';
-SELECT weekday_code, LEFT(date_created,4)  FROM weekday where LEFT(date_created,4) = '2020';
+use gamelog;
+
+-- select * from team where
+
+select * from tm_gamelog;
+
+select * from v_gamelog where gamelog_code LIKE '2019-%';
+select * from gamelog where gamelog_code LIKE '2019-%';
+
+select count(*) from gamelog where gamelog_code LIKE '2017-%';
+select count(*) from gamelog where gamelog_code LIKE '2018-%';
+select count(*) from gamelog where gamelog_code LIKE '2019-%';
+

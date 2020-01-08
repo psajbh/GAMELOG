@@ -136,6 +136,9 @@ public class ParkDao extends GameLogDao {
     	if (null == code) {
     		System.out.println("STOP");
     	}
+    	if (code.equals("OMA01")) {
+    		System.out.println();
+    	}
 		try {
 			Query<EntityPark> qPark = session.getNamedQuery("get_park_from_code");
 			qPark.setParameter("code", code);
