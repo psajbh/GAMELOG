@@ -331,5 +331,16 @@ JOIN v_gameline_bat hgb ON g.h_tm = hgb.tm_gamelog_id_pk
 JOIN v_gameline_defense hgd ON g.h_tm = hgd.tm_gamelog_id_pk
 JOIN v_gameline_pitch hgp ON g.h_tm = hgp.tm_gamelog_id_pk;
 
+CREATE VIEW v_season AS
+ select l.league_code, l.name as leagueName, d.division_code, d.name as divisionName,
+ t.team_code, t.name, t.alias, s.season_code, f.franchise_code, 
+ t.team_id_pk, s.season_id_pk, l.league_id_pk
+ from league as l 
+ LEFT JOIN division as d on l.division_id_fk = d.division_id_pk
+ LEFT JOIN team as t on t.league_id_fk = l.league_id_pk
+ LEFT JOIN season as s on s.season_id_pk = t.season_id_fk
+ LEFT JOIN franchise as f on t.franchise_id_fk = f.franchise_id_pk
+ order by f.franchise_code, s.season_code;
+
 
 
