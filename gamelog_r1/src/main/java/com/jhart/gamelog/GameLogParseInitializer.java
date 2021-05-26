@@ -14,7 +14,7 @@ public class GameLogParseInitializer {
     public static void main(String[] args) {
     	log.trace("main: - start");
         //String control = "2017";  // when UI is built, this value will be passed in.
-    	String control = "2019";
+    	String control = "2020";
     	log.debug("processing data for year: " + control);
         // importDataManager will be a service in the future
         ImportDataManager importDataManager;
