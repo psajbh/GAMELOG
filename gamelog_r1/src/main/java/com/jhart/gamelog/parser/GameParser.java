@@ -22,16 +22,20 @@ import com.jhart.gamelog.model.TeamGameLog;
 import com.jhart.gamelog.types.LocationType;
 import com.jhart.gamelog.utils.Utils;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class GameParser implements Parser<Gamelog>{
-	private static final Logger LOG = LoggerFactory.getLogger(GameParser.class);
+	//private static final Logger LOG = LoggerFactory.getLogger(GameParser.class);
     private static String START = "/GL_";
     private static String END = ".txt";
+	private static int REQUIRED_NUMBER_ELEMENTS = 161;
 	
 	public Map<String, List<Gamelog>> process(String source) {
 	    Map<String, List<Gamelog>> gameLogMap = new HashMap<>();
 		List<Gamelog> gameLogs = new ArrayList<>();
 	    String seasonSetup = source.substring(source.indexOf(GameParser.START) + GameParser.START.length());
+	   log.info("seasonSetup: " + seasonSetup); 
 	    String season = seasonSetup.substring(0, GameParser.END.length());
 		
 		Path p1 = Paths.get(source);
@@ -43,9 +47,14 @@ public class GameParser implements Parser<Gamelog>{
 					Gamelog gamelog = new Gamelog();
 					gamelog.setSeason(season);
 					gamelog.setGameLogId(l++);
-					
 					String[] elements = currentLine.split(",");
+					log.info("processing gamelog: "  + gamelog.getGameLogId() + " elements size: " + elements.length);  //161 is the required value
 					
+					if (elements.length!= REQUIRED_NUMBER_ELEMENTS ) {
+					   // throw new RuntimeException("Invalid gamelog, clean up before reprocessing");
+					    log.warn("skipping  gamelog:  " + gamelog.getGameLogId());
+					   // continue;
+					}
 					//gamelog.setSeason();
 					gamelog.setStrDate(Utils.stripQuotes(elements[0]));
 					gamelog.setGameType(Utils.stripQuotes(elements[1]));
@@ -82,14 +91,23 @@ public class GameParser implements Parser<Gamelog>{
 					if(builder.setup(visitingTeamlineScore, visitingTeamPitchingData, 
 							visitingTeamDefenseData, homeTeamlineScore, 
 							homeTeamPitchingData, homeTeamDefenseData)) {
-						builder.build(gamelog);	
+					    log.info("process setup successfull");
+					    try {
+					        log.info("process building gamelog");
+					        builder.build(gamelog);
+					    }
+					    catch(Exception e) {
+					        log.error("process building gamelog failure- " + e.getMessage(), e);
+					    }
 					}
 					//process umpires
+					log.debug("process  umpires");
 					String[] umpireData = Arrays.copyOfRange(elements, 77, 89);
 					UmpireBuilder umpireBuilder = new UmpireBuilder(gamelog.getGameLogId());
 					gamelog.setUmpireGameLog(umpireBuilder.build(umpireData));
 
 					//process key players of game
+					log.debug("process  key players");
 					String[]  playerOfRecord = Arrays.copyOfRange(elements, 93, 95);
 					Player winningPitcher = new Player(Utils.stripQuotes(playerOfRecord[1]), Utils.stripQuotes(playerOfRecord[0]));
 					gamelog.setWinningPitcher(winningPitcher);
@@ -106,7 +124,8 @@ public class GameParser implements Parser<Gamelog>{
                     Player gwRbiPlayer = new Player(Utils.stripQuotes(playerOfRecord[1]), Utils.stripQuotes(playerOfRecord[0]));
                     gamelog.setGwRbiPlayer(gwRbiPlayer);
 					
-                    //process teamGameLogs
+                  //process teams
+                    log.debug("process  teams");
                     TeamGameLogBuilder teamGameLogBuilder = new TeamGameLogBuilder(gamelog, elements);
                     Map<LocationType, TeamGameLog> teamLogMap = teamGameLogBuilder.build();
                     gamelog.setTeamLogMap(teamLogMap);
@@ -119,9 +138,11 @@ public class GameParser implements Parser<Gamelog>{
 			//viewGameLogs(gameLogs);
 		}
 		catch(IOException ioe){
+		    log.error("process -  failure: " + ioe.getMessage());
 			ioe.printStackTrace();
 		}
-		
+
+		log.debug(" returning gameLogMap");
 		return gameLogMap;
 	}
 	
@@ -129,7 +150,7 @@ public class GameParser implements Parser<Gamelog>{
     private void viewGameLogs(List<Gamelog> gameLogs) {
 		if (null != gameLogs) {
 			for (Gamelog gLog : gameLogs) {
-				LOG.debug(gLog.toString());
+				log.debug(gLog.toString());
 			}
 		}
 	}

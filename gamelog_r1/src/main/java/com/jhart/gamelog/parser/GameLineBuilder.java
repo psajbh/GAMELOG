@@ -7,13 +7,16 @@ import com.jhart.gamelog.model.gameline.PitchingGameLine;
 import com.jhart.gamelog.types.GameLineType;
 import com.jhart.gamelog.types.LocationType;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class GameLineBuilder {
 
 	private static int LINE_SCORE_SIZE = 17;
 	private static int PITCHING_DATA_SIZE = 5;
 	private static int DEFENSIVE_DATA_SIZE = 6;
 	
-	private String[] visitingTeamlineScore;
+	private String[] visitingTeamlineScore; 
 	private String[] visitingTeamPitchingData; 
 	private String[] visitingTeamDefenseData;
 	private String[] homeTeamlineScore;
@@ -27,21 +30,25 @@ public class GameLineBuilder {
 	}
 	
 	//validates the data passed in from GameParser.
-	public boolean setup(String[] visitingTeamlineScore, 
+	public boolean setup(
+	                    String[]visitingTeamlineScore, 
 						String[] visitingTeamPitchingData, 
 						String[] visitingTeamDefenseData,
 						String[] homeTeamlineScore,
 						String[] homeTeamPitchingData,
 						String[] homeTeamDefenseData) {
-		
+		log.info("setup - ");
 		boolean valid = validate(visitingTeamlineScore, homeTeamlineScore, GameLineBuilder.LINE_SCORE_SIZE);
+		log.info("validate TeamlineScores: " + valid);
 		//34,11,2,1,2,5,0,2,0,5,0, 7,2,1,0,0,9,| 5,6,6,0, 0,  |26, 9, 0, 0, 1,  0,
 		//38,13,1,1,1,6,0,0,0,0,0,12,0,0,1,0,6,| 6,5,5,2, 0,  |27, 8, 0, 0 ,0,  0,"gibsg901"
 		if (valid) {
 			valid = validate(visitingTeamPitchingData, homeTeamPitchingData, GameLineBuilder.PITCHING_DATA_SIZE);
+			log.info("validate TeamPitchingData: " + valid);
 		}
 		if (valid) {
 			valid = validate(visitingTeamDefenseData, homeTeamDefenseData, GameLineBuilder.DEFENSIVE_DATA_SIZE);
+			log.info("validate TeamDefenseData: " + valid);
 		}
 		
 		if (valid) {

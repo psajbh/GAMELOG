@@ -33,7 +33,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor 
 public class MasterGamelogDaoImp extends GameLogDao implements MasterGameLogDao {
     private static final Logger LOG = LoggerFactory.getLogger(MasterGamelogDaoImp.class);
     
@@ -83,6 +83,7 @@ public class MasterGamelogDaoImp extends GameLogDao implements MasterGameLogDao 
      */
     @Override
     public void saveAll(List<Gamelog> modelGamelog, Integer i) throws NullSessionException, DbExecutionException, Exception{
+        LOG.debug("saveAll method 1");
         if (null != i) {
             recordLimiter = i;
         }

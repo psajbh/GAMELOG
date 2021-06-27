@@ -261,7 +261,7 @@ public class GamelogTransformer implements Transformer{
     }
     
     private void processStartingPos(StartingPosition startingPosition, Person person, EntityLineItemPos entityLineItemPos) {
-    
+       LOG.debug("processStartingPos: "+ startingPosition + " person: " + person.getName());
     	switch (startingPosition) {
     		case M:
     			entityLineItemPos.setManager(getEntityPerson(person));

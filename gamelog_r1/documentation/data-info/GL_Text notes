@@ -1,0 +1,3 @@
+Need to make sure there are no  commas within quotation marks , i.e. ","  
+to do this, we need to determine the standard number of commas in a line and if a line dosen't meet this standard we need to throw an exception.
+It would be good to test for this initially.
